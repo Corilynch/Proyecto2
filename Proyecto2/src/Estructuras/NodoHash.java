@@ -66,4 +66,18 @@ public class NodoHash {
         this.pNext = pNext;
     }
     
+    public String Getposicion(){
+        NodoPosicion current = this.posiciones;
+        s += current.getPosicion();
+        current = current.getpNext();
+        
+        while(current!=null){
+        s = s + ", " + current.getPosicion();
+        current = current.getpNext();
+
+        }
+        
+        return s;
+    }
+    
 }

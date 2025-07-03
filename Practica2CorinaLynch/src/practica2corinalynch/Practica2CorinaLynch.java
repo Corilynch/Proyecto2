@@ -2,23 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package proyecto2;
-
-import Estructuras.Hash;
-import Estructuras.NodoHash;
+package practica2corinalynch;
 
 /**
  *
  * @author corinalynch
  */
-public class Proyecto2 {
+public class Practica2CorinaLynch {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-     
     }
     
 }

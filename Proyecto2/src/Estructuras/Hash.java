@@ -11,19 +11,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Implementación de una tabla hash que maneja colisiones mediante encadenamiento.
+ * Incluye funcionalidad para registrar y reportar colisiones.
+ * 
  * @author corinalynch
+ * @version 1.0
  */
 public class Hash {
+  
     private NodoHash[] Tabla;
     private int size;
-    
-    // Nuevos campos para el reporte de colisiones
     private int totalColisiones;
     private Map<Integer, List<String>> registroColisiones;
     private List<String> listaColisiones;
     
-    public Hash(){
+    /**
+     * Constructor que inicializa una tabla hash con tamaño por defecto (10).
+     */
+    public Hash() {
         this.size = 10;
         this.Tabla = new NodoHash[size];
         this.totalColisiones = 0;
@@ -31,14 +36,17 @@ public class Hash {
         this.listaColisiones = new ArrayList<>();
     }
     
-    // Métodos existentes (se mantienen exactamente igual)
-    public void Guardar(String triplete, int posicion){
+    /**
+     * Almacena un triplete en la tabla hash.
+     * @param triplete Cadena a almacenar
+     * @param posicion Posición asociada al triplete
+     */
+    public void Guardar(String triplete, int posicion) {
         int clave = Hasheo(triplete);
         if(this.Tabla[clave]==null){
             NodoHash nodo = new NodoHash(triplete, posicion);
             this.Tabla[clave] = nodo;
         } else{
-            // Antes de guardar, verificamos si es colisión real
             if(!this.Tabla[clave].getCadena().equals(triplete)) {
                 registrarColision(clave, this.Tabla[clave].getCadena(), triplete);
             }
@@ -46,7 +54,13 @@ public class Hash {
         }
     }
     
-    private void GuardarHit(String triplete, int posicion, int clave){
+    /**
+     * Maneja la inserción cuando ocurre una colisión (método auxiliar).
+     * @param triplete Cadena a almacenar
+     * @param posicion Posición asociada
+     * @param clave Índice hash calculado
+     */
+    private void GuardarHit(String triplete, int posicion, int clave) {
         NodoHash current = this.Tabla[clave];
         NodoHash aux;
         do {
@@ -60,7 +74,12 @@ public class Hash {
         aux.setpNext(new NodoHash(triplete, posicion));
     }
     
-    public NodoHash Buscar(String triplete){
+    /**
+     * Busca un triplete en la tabla hash.
+     * @param triplete Cadena a buscar
+     * @return NodoHash que contiene el triplete, o null si no se encuentra
+     */
+    public NodoHash Buscar(String triplete) {
         int clave = Hasheo(triplete);
         NodoHash nodo = this.Tabla[clave];
         while(nodo!=null){
@@ -72,21 +91,29 @@ public class Hash {
         return nodo;
     }
     
-    private int Hasheo(String triplete){
+    /**
+     * Calcula el valor hash para un triplete.
+     * @param triplete Cadena a hashear
+     * @return Índice en la tabla hash
+     */
+    private int Hasheo(String triplete) {
         int valor = abs(triplete.hashCode());
         return valor % size;
     }
     
-    // Nuevos métodos para el reporte de colisiones
+    /**
+     * Registra internamente una colisión detectada.
+     * @param indice Índice donde ocurrió la colisión
+     * @param existente Valor previamente almacenado
+     * @param nuevo Valor que causó la colisión
+     */
     private void registrarColision(int indice, String existente, String nuevo) {
         totalColisiones++;
         
-        // Registrar en lista simple
         String colision = String.format("Colisión en índice %d: '%s' con '%s'", 
                                       indice, existente, nuevo);
         listaColisiones.add(colision);
         
-        // Registrar en mapa detallado
         if (!registroColisiones.containsKey(indice)) {
             registroColisiones.put(indice, new ArrayList<>());
         }
@@ -94,8 +121,8 @@ public class Hash {
     }
     
     /**
-     * Genera un reporte detallado de colisiones
-     * @return Lista de strings con el reporte formateado
+     * Genera un reporte detallado de todas las colisiones registradas.
+     * @return Lista formateada con el reporte de colisiones
      */
     public List<String> getReporteColisiones() {
         List<String> reporte = new ArrayList<>();
@@ -126,14 +153,16 @@ public class Hash {
     }
     
     /**
-     * @return Número total de colisiones registradas
+     * Obtiene el número total de colisiones registradas.
+     * @return Contador total de colisiones
      */
     public int getTotalColisiones() {
         return totalColisiones;
     }
     
     /**
-     * @return Mapa de colisiones por índice
+     * Obtiene el mapa detallado de colisiones organizado por índices.
+     * @return Mapa donde la clave es el índice y el valor es la lista de colisiones
      */
     public Map<Integer, List<String>> getMapaColisiones() {
         return registroColisiones;

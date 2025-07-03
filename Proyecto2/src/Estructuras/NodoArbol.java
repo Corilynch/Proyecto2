@@ -47,4 +47,8 @@ public class NodoArbol {
     public NodoHash getNodo() {
         return NodoTriplete;
     }
+    
+     public void setNodoTriplete(NodoHash nodo) {
+        this.NodoTriplete = nodo;
+    }
 }

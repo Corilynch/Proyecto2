@@ -36,6 +36,20 @@ public class Hash {
         this.listaColisiones = new ArrayList<>();
     }
     
+ /**
+     * @return La tabla hash completa para iteración
+     */
+    public NodoHash[] getTabla() {
+        return this.Tabla;
+    }
+    
+    /**
+     * @return Tamaño de la tabla hash
+     */
+    public int getSize() {
+        return this.size;
+    }
+
     /**
      * Almacena un triplete en la tabla hash.
      * @param triplete Cadena a almacenar

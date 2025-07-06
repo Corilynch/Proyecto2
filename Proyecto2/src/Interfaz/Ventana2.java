@@ -6,9 +6,13 @@ package Interfaz;
 
 import Estructuras.Hash;
 import Procesamiento.ProcesadorADN;
+import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 /**
  * Ventana para cargar archivos TXT.
@@ -98,8 +102,19 @@ public class Ventana2 extends javax.swing.JFrame {
 
     private void BotonCargarTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCargarTXTActionPerformed
         ProcesadorADN procesador = new ProcesadorADN();
+        JFileChooser archivo = new JFileChooser();
+        archivo.setFileFilter(new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt"));
+        int resultado = archivo.showOpenDialog(this); 
+        File archivoSeleccionado = null;
+//        if (archivoSeleccionado == null) {
+//            JOptionPane.showMessageDialog(this, "No se seleccionó ningún archivo.", "Aviso", JOptionPane.WARNING_MESSAGE);
+//            return; 
+//}
+        if(resultado == JFileChooser.APPROVE_OPTION){
+           archivoSeleccionado = archivo.getSelectedFile();
+        }
         try{
-            Hash tableHash = procesador.cargarArchivoADN(); 
+            Hash tableHash = procesador.procesarArchivo(archivoSeleccionado); 
             if(tableHash!= null){
                 TextoAprobacionTXT.setText("Archivo cargado con exito");
                 continuar = true;

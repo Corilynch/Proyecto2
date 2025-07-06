@@ -5,7 +5,8 @@
 package Estructuras;
 
 /**
- *
+ * Clase que guarda la información de una colisión en la tabla hash. Guarda el índice donde ocurrió y las cadenas involucradas.
+ * También enlaza con otros nodos de colisión..
  * @author alexandraloynaz
  */
 public class NodoColision {
@@ -13,7 +14,10 @@ public class NodoColision {
         String existente;
         String nuevo;
         NodoColision pNext;
-
+    /**
+     * Constructor del nodo de colisión.
+     */
+        
     public NodoColision(int indice, String existente, String nuevo) {
         this.indice = indice;
         this.existente = existente;

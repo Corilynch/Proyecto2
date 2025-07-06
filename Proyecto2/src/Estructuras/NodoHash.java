@@ -19,7 +19,6 @@ public class NodoHash {
      * 
      * @param cadena La cadena de texto a almacenar en el nodo
      * @param posicion La posición inicial donde aparece la cadena
-     * @throws IllegalArgumentException Si la cadena es null o vacía
      */
     public NodoHash(String cadena, int posicion) {
         this.cadena = cadena;
@@ -31,7 +30,7 @@ public class NodoHash {
      * Incrementa la frecuencia del nodo y añade una nueva posición donde aparece la cadena.
      * 
      * @param posicion La nueva posición donde se encontró la cadena
-     * @throws IllegalArgumentException Si la posición es negativa
+  
      */
     public void Repetido(int posicion) {
         this.frecuencia++;

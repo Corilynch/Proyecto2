@@ -5,13 +5,15 @@
 package Estructuras;
 
 /**
- *
+ *  Clase que contiene las primitivas de una lista simple pero sirve para guardar las colisiones.. 
  * @author alexandraloynaz
  */
 public class ListaColisiones {
     private NodoColision pFirst;
     private int cont;
-
+/**
+ * Constructor que inicializa este lista
+ */
     public ListaColisiones() {
         this.pFirst = null;
         this.cont = 0;
@@ -21,7 +23,7 @@ public class ListaColisiones {
  * @return verdadero si esta vacia, falso si no se encuntra vacía
  */
     public boolean esVacio() {
-        return pFirst == null;
+        return getpFirst() == null;
     }
     /**
      * Inserta una colisión al final de la lista.
@@ -32,9 +34,9 @@ public class ListaColisiones {
     public void insertarFinal(int indice, String existente, String nuevo) {
         NodoColision nuevoNodo = new NodoColision(indice, existente, nuevo);
         if (esVacio()) {
-            pFirst = nuevoNodo;
+            setpFirst(nuevoNodo);
         } else {
-            NodoColision aux = pFirst;
+            NodoColision aux = getpFirst();
             while (aux.pNext != null) {
                 aux = aux.pNext;
             }
@@ -47,8 +49,8 @@ public class ListaColisiones {
      * Vacía la lista.
      */
     public void vaciar() {
-        pFirst = null;
-        cont = 0;
+        setpFirst(null);
+        setCont(0);
     }
 
     /**
@@ -59,7 +61,7 @@ public class ListaColisiones {
             System.out.println("No se registraron colisiones.");
             return;
         }
-        NodoColision aux = pFirst;
+        NodoColision aux = getpFirst();
         while (aux != null) {
             System.out.printf("Colisión en índice %d: '%s' con '%s'%n", aux.indice, aux.existente, aux.nuevo);
             aux = aux.pNext;
@@ -72,4 +74,29 @@ public class ListaColisiones {
     public int getCont() {
         return cont;
     }
+
+    /**
+     * Obtiene el primer nodo de la lista
+     * @return el primer nodo de la lista
+     */
+    public NodoColision getpFirst() {
+        return pFirst;
+    }
+
+    /**
+     * Establece el primer nodo de la lista
+     * @param pFirst el nodo que se convertira en el primero 
+     */
+    public void setpFirst(NodoColision pFirst) {
+        this.pFirst = pFirst;
+    }
+
+    /**
+     * Establece el contador 
+     * @param cont el valor del contador uqe se estableció,
+     */
+    public void setCont(int cont) {
+        this.cont = cont;
+    }
+    
 }

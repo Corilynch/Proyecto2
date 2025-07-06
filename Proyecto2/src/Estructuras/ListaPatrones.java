@@ -10,8 +10,13 @@ package Estructuras;
  * @author alexandraloynaz
  */
 public class ListaPatrones {
+    /**
+     * Constructor que inicializa una ListaSimple llamada patrones.
+     */
     private ListaSimple patrones;
-    
+    /**
+     * Crear una nueva lista Simple llamada patrones para ir guardando todos lo que se encuntran
+     */
     public ListaPatrones() {
         patrones = new ListaSimple();
     }
@@ -60,9 +65,9 @@ public class ListaPatrones {
         
 
             
-       
-    
+  
     /**
+     * Obtiene un arreglo de patrones
      * @return Arreglo de los patrones ordenados
      */
     public NodoHash[] getPatrones() {

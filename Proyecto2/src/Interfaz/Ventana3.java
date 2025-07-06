@@ -4,18 +4,65 @@
  */
 package Interfaz;
 
+import Estructuras.Hash;
+import Estructuras.NodoHash;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 /**
  *
  * @author alexandraloynaz
  */
 public class Ventana3 extends javax.swing.JFrame {
-
+    
+     private Hash hashTable;   
     /**
      * Creates new form Ventana3
      */
-    public Ventana3() {
+        
+    public Ventana3(Hash hashTable) {
+        
         initComponents();
+        setSize(600,630);
+        setLocationRelativeTo(null);
+        this.hashTable = hashTable;
+        //Ver patrones
+        ImageIcon botonVer = new ImageIcon(getClass().getResource("/Imagenes/BotonVerPatrones.png"));
+        botonVPatrones.setIcon(botonVer);
+        // Buscar Patrones
+        ImageIcon botonBuscar = new ImageIcon(getClass().getResource("/Imagenes/BotonBuscarPatrones.png"));
+        botonBPatrones.setIcon(botonBuscar);
+        // Menos frecuente 
+        ImageIcon botonMenos = new ImageIcon(getClass().getResource("/Imagenes/BotonMenosFrecuente.png"));
+        botonMeFrec.setIcon(botonMenos);
+        // Mas Frecuente 
+        ImageIcon botonMas = new ImageIcon(getClass().getResource("/Imagenes/BotonMasFrecuente.png"));
+        botonMaFrec.setIcon(botonMas);
+        // ver Reportes
+        ImageIcon botonReportes = new ImageIcon(getClass().getResource("/Imagenes/BotonReportes.png"));
+        botonReportC.setIcon(botonReportes);
+        // Lista Aminoacidos 
+        ImageIcon botonLAminoacidos = new ImageIcon(getClass().getResource("/Imagenes/BotonListaAminoacidos.png"));
+        botonLisAmino.setIcon(botonLAminoacidos);
+        // fondo 
+        ImageIcon imagenfondo = new ImageIcon(getClass().getResource("/Imagenes/FondoVentana3.png"));
+        JLabel fondo = new JLabel(imagenfondo);
+        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 605));
+
+
+        
     }
+    /**
+     * Funcion que llama a obtener todos, lo cual se mostrara en Ver patrones
+     * @return el Strign con todos los patrones y su frecuencia.
+     */
+    public String obtenerPatronesDesdeHash() {
+        return hashTable.obtenerTodos();
+}
+
+
+        
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,57 +73,76 @@ public class Ventana3 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        botonVPatrones = new javax.swing.JButton();
+        botonBPatrones = new javax.swing.JButton();
+        botonMeFrec = new javax.swing.JButton();
+        botonMaFrec = new javax.swing.JButton();
+        botonReportC = new javax.swing.JButton();
+        botonLisAmino = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        botonVPatrones.setBackground(new java.awt.Color(89, 193, 201));
+        botonVPatrones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVPatronesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonVPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 160, 60));
+
+        botonBPatrones.setBackground(new java.awt.Color(89, 193, 201));
+        getContentPane().add(botonBPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 140, 70));
+
+        botonMeFrec.setBackground(new java.awt.Color(89, 193, 201));
+        getContentPane().add(botonMeFrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 160, 80));
+
+        botonMaFrec.setBackground(new java.awt.Color(89, 193, 201));
+        getContentPane().add(botonMaFrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 150, 80));
+
+        botonReportC.setBackground(new java.awt.Color(89, 193, 201));
+        getContentPane().add(botonReportC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 160, 90));
+
+        botonLisAmino.setBackground(new java.awt.Color(89, 193, 201));
+        botonLisAmino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLisAminoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonLisAmino, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 150, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonLisAminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLisAminoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonLisAminoActionPerformed
+
+    private void botonVPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVPatronesActionPerformed
+    String patrones = obtenerPatronesDesdeHash();
+    
+    VentanaVPatrones ver = new VentanaVPatrones(patrones);
+    ver.setVisible(true);
+    }//GEN-LAST:event_botonVPatronesActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana3().setVisible(true);
+                Hash hashnulo = new Hash();
+                new Ventana3(hashnulo).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonBPatrones;
+    private javax.swing.JButton botonLisAmino;
+    private javax.swing.JButton botonMaFrec;
+    private javax.swing.JButton botonMeFrec;
+    private javax.swing.JButton botonReportC;
+    private javax.swing.JButton botonVPatrones;
     // End of variables declaration//GEN-END:variables
 }

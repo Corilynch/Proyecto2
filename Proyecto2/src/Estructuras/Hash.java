@@ -60,6 +60,22 @@ public class Hash {
         }
         
         }
+    /**
+     * Funcion que regresa todos los aminoácidos de mi HashTable
+     * @return el string con todos los aminoácidos 
+     */
+      public String obtenerTodos() {
+            String resultado = "";
+            for (int i = 0; i < Tabla.length; i++) {
+            NodoHash actual = Tabla[i];
+            while (actual != null) {
+                resultado += actual.getCadena() + " -> Frecuencia: " + actual.getFrecuencia() + " | Posiciones: " + actual.Getposicion()+ "\n"; 
+            actual = actual.getpNext();
+        }
+    }
+    return resultado;
+}
+
    /**
     * Método que maneja la inserción en la lista enlazada dentro de la tabla hash en caso de colisión.
      * Si la tripleta ya existe, actualiza la frecuencia y posiciones.

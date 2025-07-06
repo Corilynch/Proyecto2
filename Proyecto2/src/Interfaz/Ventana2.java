@@ -26,6 +26,7 @@ public class Ventana2 extends javax.swing.JFrame {
      * Indica si el archivo fu cargado y validado
      */
     private boolean continuar = false;
+    private Hash tableHash;
      /**
      * Crea la ventana 600X630 px, con sus botones, imagen de fondo y texto
      */
@@ -91,7 +92,7 @@ public class Ventana2 extends javax.swing.JFrame {
 
     private void BotonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonContinuarActionPerformed
          if(continuar){
-            Ventana3 v3= new Ventana3(); 
+            Ventana3 v3= new Ventana3(tableHash); 
             v3.setVisible(true);
         }
         else{
@@ -116,7 +117,7 @@ public class Ventana2 extends javax.swing.JFrame {
             return; 
         }
         try{
-            Hash tableHash = procesador.procesarArchivo(archivoSeleccionado); 
+            tableHash = procesador.procesarArchivo(archivoSeleccionado); 
             if(tableHash!= null){
                 TextoAprobacionTXT.setText("Archivo cargado con exito");
                 continuar = true;

@@ -4,17 +4,40 @@
  */
 package Interfaz;
 
+import Estructuras.Hash;
+import Procesamiento.ProcesadorADN;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 /**
- *
+ * Ventana para cargar archivos TXT.
+ * Permite: seleccionar un archivo y continuar a la 
+ * siguiente ventena.
  * @author alexandraloynaz
  */
 public class Ventana2 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Ventana2
+     * Indica si el archivo fu cargado y validado
+     */
+    private boolean continuar = false;
+     /**
+     * Crea la ventana 600X630 px, con sus botones, imagen de fondo y texto
      */
     public Ventana2() {
         initComponents();
+        setSize(600,630);
+        setLocationRelativeTo(null);
+
+        ImageIcon boton = new ImageIcon(getClass().getResource("/Imagenes/BotonCargarTXT.png"));
+        BotonCargarTXT.setIcon(boton);
+        ImageIcon imagenFondo= new ImageIcon(getClass().getResource("/Imagenes/FondoVentana2.png"));
+        JLabel fondo = new JLabel(imagenFondo);
+        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 605));
+        TextoAprobacionTXT.setText("");
+        ImageIcon continuar = new ImageIcon(getClass().getResource("/Imagenes/BotonContinuar.png"));
+        BotonContinuar.setIcon(continuar);
     }
 
     /**
@@ -26,21 +49,71 @@ public class Ventana2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        BotonCargarTXT = new javax.swing.JButton();
+        TextoAprobacionTXT = new javax.swing.JTextField();
+        BotonContinuar = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BotonCargarTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCargarTXTActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonCargarTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 230, 80));
+
+        TextoAprobacionTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoAprobacionTXTActionPerformed(evt);
+            }
+        });
+        getContentPane().add(TextoAprobacionTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 230, -1));
+
+        BotonContinuar.setText("jButton1");
+        BotonContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonContinuarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 170, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TextoAprobacionTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoAprobacionTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoAprobacionTXTActionPerformed
+
+    private void BotonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonContinuarActionPerformed
+         if(continuar){
+            Ventana3 v3= new Ventana3(); 
+            v3.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Primero debe cargar un archivo TXT y se debe validar que cumpla con la estructura", "Error", JOptionPane.ERROR_MESSAGE);
+        
+        }
+    }//GEN-LAST:event_BotonContinuarActionPerformed
+
+    private void BotonCargarTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCargarTXTActionPerformed
+        ProcesadorADN procesador = new ProcesadorADN();
+        try{
+            Hash tableHash = procesador.cargarArchivoADN(); 
+            if(tableHash!= null){
+                TextoAprobacionTXT.setText("Archivo cargado con exito");
+                continuar = true;
+                BotonContinuar.setEnabled(continuar);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error al cargar el archivo, asegura que tenga la estructura deseada", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+}
+        catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Error inesperado, vuelva a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+        
+    }//GEN-LAST:event_BotonCargarTXTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +151,8 @@ public class Ventana2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonCargarTXT;
+    private javax.swing.JButton BotonContinuar;
+    private javax.swing.JTextField TextoAprobacionTXT;
     // End of variables declaration//GEN-END:variables
 }

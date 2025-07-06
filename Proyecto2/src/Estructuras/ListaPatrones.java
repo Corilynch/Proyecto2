@@ -4,18 +4,16 @@
  */
 package Estructuras;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Clase para manejar la lista de patrones ordenados por frecuencia
+ * @author alexandraloynaz
  */
 public class ListaPatrones {
-    private ArrayList<NodoHash> patrones;
+    private ListaSimple patrones;
     
     public ListaPatrones() {
-        patrones = new ArrayList<>();
+        patrones = new ListaSimple();
     }
     
     /**
@@ -23,10 +21,11 @@ public class ListaPatrones {
      * @param tabla Hash table con los patrones
      */
     public void cargarDesdeHash(Hash tabla) {
-        patrones.clear();
+        patrones.vaciar();
+        NodoHash [] tablaHash = tabla.getTabla();
         for (NodoHash nodo : tabla.getTabla()) {
             while (nodo != null) {
-                patrones.add(nodo);
+                patrones.insertarFinal(nodo);
                 nodo = nodo.getpNext();
             }
         }
@@ -35,21 +34,46 @@ public class ListaPatrones {
     
     /**
      * Ordena los patrones por frecuencia (de mayor a menor)
+     * Ordenando utilizando una ListSimple
      */
     private void ordenarPorFrecuencia() {
-        Collections.sort(patrones, new Comparator<NodoHash>() {
-            @Override
-            public int compare(NodoHash o1, NodoHash o2) {
-                return Integer.compare(o2.getFrecuencia(), o1.getFrecuencia());
+        if(patrones.esVacio()){
+            return;
+        }
+        boolean intercambio;
+        do{
+            intercambio = false;
+            NodoLSimple actual = patrones.getpFirst();
+            while(actual!= null && actual.getpNext()!= null){
+            NodoLSimple siguiente = actual.getpNext();
+                if (actual.getDatos().getFrecuencia() < siguiente.getDatos().getFrecuencia()) {
+                    
+                    NodoHash temp = actual.getDatos();
+                    actual.setDatos(siguiente.getDatos());
+                    siguiente.setDatos(temp);
+                    intercambio = true;
+                }
+                actual = siguiente;
             }
-        });
+        } while (intercambio);
     }
+        
+
+            
+       
     
     /**
-     * @return Lista de patrones ordenados
+     * @return Arreglo de los patrones ordenados
      */
-    public ArrayList<NodoHash> getPatrones() {
-        return patrones;
+    public NodoHash[] getPatrones() {
+        NodoHash[] arreglo = new NodoHash[patrones.getCont()];
+        NodoLSimple aux = patrones.getpFirst();
+        int i = 0;
+        while (aux != null) {
+            arreglo[i++] = aux.getDatos();
+            aux = aux.getpNext();
+        }
+        return arreglo;
     }
     
     /**
@@ -58,26 +82,42 @@ public class ListaPatrones {
      * @return NodoHash con la información o null si no existe
      */
     public NodoHash buscarPatron(String triplete) {
-        for (NodoHash nodo : patrones) {
-            if (nodo.getCadena().equals(triplete)) {
-                return nodo;
+        NodoLSimple aux = patrones.getpFirst();
+        while (aux != null) {
+            if (aux.getDatos().getCadena().equals(triplete)) {
+                return aux.getDatos();
             }
+            aux = aux.getpNext();
         }
         return null;
     }
     
     /**
+     * Obtiene el valor mas frecuente
      * @return El patrón más frecuente
      */
     public NodoHash getMasFrecuente() {
-        return patrones.isEmpty() ? null : patrones.get(0);
-    }
-    
-    /**
-     * @return El patrón menos frecuente
-     */
-    public NodoHash getMenosFrecuente() {
-        return patrones.isEmpty() ? null : patrones.get(patrones.size()-1);
+        if (patrones.esVacio()) {
+            return null;
+        }   
+        else {
+        return patrones.getpFirst().getDatos();
     }
 }
 
+    
+    /**
+     * Obteine el valor menos frecuente
+     * @return El patrón menos frecuente
+     */
+    public NodoHash getMenosFrecuente() {
+        if (patrones.esVacio()) return null;
+
+        NodoLSimple aux = patrones.getpFirst();
+        while (aux.getpNext() != null) {
+            aux = aux.getpNext();
+        }
+        return aux.getDatos();
+    }
+}
+    

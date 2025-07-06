@@ -22,8 +22,8 @@ public class Hash {
      * Inicializa los contadores y la lista de colisiones vacía.
      */
     public Hash() {
-        this.Tabla = new NodoHash[size];
         this.size = 10;
+        this.Tabla = new NodoHash[size];
         this.totalColisiones = 0;
         this.listaColisiones = new ListaColisiones();
     }

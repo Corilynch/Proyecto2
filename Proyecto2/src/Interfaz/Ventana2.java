@@ -106,12 +106,14 @@ public class Ventana2 extends javax.swing.JFrame {
         archivo.setFileFilter(new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt"));
         int resultado = archivo.showOpenDialog(this); 
         File archivoSeleccionado = null;
-//        if (archivoSeleccionado == null) {
-//            JOptionPane.showMessageDialog(this, "No se seleccionó ningún archivo.", "Aviso", JOptionPane.WARNING_MESSAGE);
-//            return; 
-//}
+       
+
         if(resultado == JFileChooser.APPROVE_OPTION){
            archivoSeleccionado = archivo.getSelectedFile();
+        }
+       else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ningún archivo.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return; 
         }
         try{
             Hash tableHash = procesador.procesarArchivo(archivoSeleccionado); 

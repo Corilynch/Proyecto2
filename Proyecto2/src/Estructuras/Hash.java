@@ -61,6 +61,69 @@ public class Hash {
         
         }
     /**
+     * Función que regresa el menos frecuente en String
+     * @return la cadena menos frecuente.
+     */
+    public String MenosFrecuenteString() {
+        NodoHash nodo = getMenosFrecuente();
+        if (nodo == null) {
+            return "No hay datos disponibles.";
+        }
+        return "Cadena: " + nodo.getCadena() + "\nFrecuencia: " + nodo.getFrecuencia() + "\nPosiciones: " + nodo.Getposicion()+"\n";
+    }
+    /**
+     * Función que regresa el más frecuente en String
+     * @return la cadena mas frecuente.
+     */
+    public String MasFrecuenteString() {
+    NodoHash nodo = getMasFrecuente();
+    if (nodo == null) {
+        return "No hay datos disponibles.";
+    }
+    return "Cadena: " + nodo.getCadena() + "\nFrecuencia: " + nodo.getFrecuencia() + "\nPosiciones: " + nodo.Getposicion()+"\n";
+}
+
+
+    /**
+     * Funcion que buscar la cadena menos frecuente
+     * @return la cadena menos frecuente. 
+     */
+    public NodoHash getMenosFrecuente() {
+        NodoHash menosFrecuente = null;
+        int menorFrecuencia = -1;   
+        for (int i = 0; i < Tabla.length; i++) {
+            NodoHash actual = Tabla[i];
+            while (actual != null) {
+                if (menosFrecuente == null || actual.getFrecuencia() < menorFrecuencia) {
+                menosFrecuente = actual;
+                menorFrecuencia = actual.getFrecuencia();
+            }
+            actual = actual.getpNext();
+        }
+    }
+    return menosFrecuente;
+}
+    
+    /**
+     * Función que buscar el mas frecuente.
+     * @return el NodoHash mas frecuente 
+     */
+    public NodoHash getMasFrecuente() {
+        NodoHash masFrecuente = null;
+        int mayorFrecuencia = -1;
+        for (int i = 0; i < Tabla.length; i++) {
+        NodoHash actual = Tabla[i];
+        while (actual != null) {
+            if (masFrecuente == null || actual.getFrecuencia() > mayorFrecuencia) {
+                masFrecuente = actual;
+                mayorFrecuencia = actual.getFrecuencia();
+            }
+            actual = actual.getpNext();
+        }
+    }
+    return masFrecuente;
+}
+    /**
      * Funcion que regresa todos los aminoácidos de mi HashTable
      * @return el string con todos los aminoácidos 
      */

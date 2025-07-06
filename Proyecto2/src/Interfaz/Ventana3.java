@@ -89,15 +89,30 @@ public class Ventana3 extends javax.swing.JFrame {
                 botonVPatronesActionPerformed(evt);
             }
         });
-        getContentPane().add(botonVPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 160, 60));
+        getContentPane().add(botonVPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 160, 60));
 
         botonBPatrones.setBackground(new java.awt.Color(89, 193, 201));
+        botonBPatrones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBPatronesActionPerformed(evt);
+            }
+        });
         getContentPane().add(botonBPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 140, 70));
 
         botonMeFrec.setBackground(new java.awt.Color(89, 193, 201));
+        botonMeFrec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMeFrecActionPerformed(evt);
+            }
+        });
         getContentPane().add(botonMeFrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 160, 80));
 
         botonMaFrec.setBackground(new java.awt.Color(89, 193, 201));
+        botonMaFrec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMaFrecActionPerformed(evt);
+            }
+        });
         getContentPane().add(botonMaFrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 150, 80));
 
         botonReportC.setBackground(new java.awt.Color(89, 193, 201));
@@ -124,6 +139,21 @@ public class Ventana3 extends javax.swing.JFrame {
     VentanaVPatrones ver = new VentanaVPatrones(patrones);
     ver.setVisible(true);
     }//GEN-LAST:event_botonVPatronesActionPerformed
+
+    private void botonBPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBPatronesActionPerformed
+        VentanaBPatrones ver = new VentanaBPatrones(hashTable);
+        ver.setVisible(true);
+    }//GEN-LAST:event_botonBPatronesActionPerformed
+
+    private void botonMeFrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMeFrecActionPerformed
+        VentanaMenosFrecuente ver = new VentanaMenosFrecuente (hashTable); 
+        ver.setVisible(true);
+    }//GEN-LAST:event_botonMeFrecActionPerformed
+
+    private void botonMaFrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMaFrecActionPerformed
+       VentabaMasFrecuente ver = new VentabaMasFrecuente (hashTable); 
+        ver.setVisible(true);
+    }//GEN-LAST:event_botonMaFrecActionPerformed
 
     /**
      * @param args the command line arguments

@@ -15,7 +15,9 @@ public class NodoAminoacidos {
     private NodoAminoacidos pNext;
 /**
  * Inicializa un nuevo nodo con su información
- * @param dato todo la información de ese aminoacido
+ * @param cadena la cadena que se insertará en ese nodo
+ * @param frecuencia la frecuencia con la que aparece
+ * @param tipo el tipo de aminoácido que es
  */
     public NodoAminoacidos(String cadena, int frecuencia, String tipo) {
         this.cadena = cadena;

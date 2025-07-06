@@ -27,10 +27,12 @@ public class ListaAminoacidos {
     }
 /**
  * Agregar un nodo al final de la lista 
- * @param dato el dato del nodo que se va a agregar
+ * @param cadena la cadena que va a contener ese nodo
+ * @param frecuencia la frecuencia con la que aparece esa cadena
+ * @param tipo  el tipo de aminoácido que es
  */
-    public void insertarFinal(String tripleta, int frecuencia, String tipo) {
-        NodoAminoacidos nuevo = new NodoAminoacidos(tripleta, frecuencia, tipo);
+    public void insertarFinal(String cadena, int frecuencia, String tipo) {
+        NodoAminoacidos nuevo = new NodoAminoacidos(cadena, frecuencia, tipo);
         if (esVacio()) {
             pFirst = nuevo;
         } else {

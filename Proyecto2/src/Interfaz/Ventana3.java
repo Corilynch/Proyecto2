@@ -5,7 +5,6 @@
 package Interfaz;
 
 import Estructuras.Hash;
-import Estructuras.NodoHash;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 

@@ -6,7 +6,9 @@ package Interfaz;
 
 import Estructuras.Hash;
 import Procesamiento.ListaAminoacidos;
+import Procesamiento.ListaSimpleReportes;
 import Procesamiento.MapeadorAminoacidos;
+import Procesamiento.NodoReportes;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -24,11 +26,21 @@ public class VentanaListaAmino extends javax.swing.JFrame {
         setSize(600,630);
         this.hashTable = hashTable;
         MapeadorAminoacidos mapeador = new MapeadorAminoacidos();
-        ListaAminoacidos listaAmino = new ListaAminoacidos();
+        ListaSimpleReportes listaAmino = new ListaSimpleReportes();
 
-        mapeador.generarListaAmino(hashTable, listaAmino);
+        listaAmino = mapeador.generarReporteAminoacidos(hashTable);
+        NodoReportes actual = listaAmino.getpFirsrt();
+        String reporte = "";
+            
+        while (actual != null) {
+        reporte += actual.getDato() + "\n";
+    actual = actual.getpNext();
+}
 
-        AreaMostrar.setText(listaAmino.imprimir());
+
+        
+        AreaMostrar.setText(reporte);
+//        AreaMostrar.setText(listaAmino.imprimir());
         ImageIcon BotonRegresar = new ImageIcon(getClass().getResource("/Imagenes/botonRegresar.png"));
         botonRegresar.setIcon(BotonRegresar);
        

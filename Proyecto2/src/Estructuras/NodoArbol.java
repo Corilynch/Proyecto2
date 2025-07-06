@@ -5,7 +5,7 @@
 package Estructuras;
 
 /**
- *
+ * Clase que representa a un nodo del arbol
  * @author corinalynch
  */
 public class NodoArbol {

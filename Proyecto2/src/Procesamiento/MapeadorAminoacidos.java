@@ -112,7 +112,7 @@ public class MapeadorAminoacidos {
      */
     public String abrebiatura3(String tripleta){
         for (int i = 0; i < codonAminoacido.length; i++) {
-            if(codonAminoacido[i][0].equals(tripleta)){
+            if(codonAminoacido[i][1].equals(tripleta)){
                 return codonAminoacido[i][2];}
         }
           return "Invalido";  
@@ -120,7 +120,7 @@ public class MapeadorAminoacidos {
     
     public String abrebiatura1(String tripleta){
         for (int i = 0; i < codonAminoacido.length; i++) {
-            if(codonAminoacido[i][0].equals(tripleta)){ 
+            if(codonAminoacido[i][1].equals(tripleta)){ 
                 return codonAminoacido[i][3];}
         }
           return "Invalido";  
@@ -141,7 +141,11 @@ public class MapeadorAminoacidos {
     public boolean esParada(String triplete) {
         return triplete.equals("TAA") || triplete.equals("TAG") || triplete.equals("TGA");
     }
-    
+   /** 
+    * Genera una lista con todos los Aminoácidos del hashTable
+    * @param tabla la hashTable que desea desa evaluar
+    * @param lista la lista a la cual se ira insertando cada nodo, guardadno la información.
+    */ 
     public void generarListaAmino(Hash tabla, ListaAminoacidos lista){
         lista.vaciar();
         NodoHash[] tablaDatos = tabla.getTabla();
@@ -157,7 +161,86 @@ public class MapeadorAminoacidos {
             
         }
     }
-  
+    
+  /**
+ * Genera un reporte con los aminoácidos y sus cadenas ordenados por frecuencia total. El numero máximo de cadenas es 4*12, ya que son 4 letras y 12 combinaciones con cada una al inicio
+ * @param tabla La tabla hash procesada con los cadenas.
+ * @return Una ListaSimpleReportes.
+ */
+public ListaSimpleReportes generarReporteAminoacidos(Hash tabla) {
+    MapeadorAminoacidos mapeador = new MapeadorAminoacidos();
+    ListaSimpleReportes reporte = new ListaSimpleReportes();
+    
+    
+    String[] aminoacidos = new String[64];
+    int[] frecuenciasTotales = new int[64];
+    int count = 0;
+    NodoHash[] tablaDatos = tabla.getTabla();
+    for (int i = 0; i < tablaDatos.length; i++) {
+        NodoHash nodo = tablaDatos[i];
+        while (nodo != null) {
+            String cadena = nodo.getCadena();
+            int frecuencia = nodo.getFrecuencia();
+            String aminoacido = mapeador.obtenerAminoacido(cadena);
+            int posicion = -1;
+            for (int j = 0; j < count; j++) {
+                if (aminoacidos[j].equals(aminoacido)) {
+                    posicion = j;
+                    break;
+                }
+            }
+
+            if (posicion == -1) {
+                aminoacidos[count] = aminoacido;
+                frecuenciasTotales[count] = frecuencia;
+                count++;
+            } else {
+                frecuenciasTotales[posicion] += frecuencia;
+            } nodo = nodo.getpNext();
+        }
+    }
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (frecuenciasTotales[j] < frecuenciasTotales[j + 1]) {
+                int temp = frecuenciasTotales[j];
+                frecuenciasTotales[j] = frecuenciasTotales[j + 1];
+                frecuenciasTotales[j + 1] = temp;
+
+                String tempAmino = aminoacidos[j];
+                aminoacidos[j] = aminoacidos[j + 1];
+                aminoacidos[j + 1] = tempAmino;
+            }
+        }
+    }
+
+
+    for (int i = 0; i < count; i++) {
+        String aminoacido = aminoacidos[i];
+        int total = frecuenciasTotales[i];
+        String tipo = mapeador.obtenerTipo(aminoacido);
+        String abrev3 = mapeador.abrebiatura3(aminoacido);
+        String abrev1 = mapeador.abrebiatura1(aminoacido);
+        reporte.insertarFinal("-------------------------------------");
+        reporte.insertarFinal("AMINOÁCIDO: " + aminoacido + "  " + abrev3 + " - " + abrev1 );
+        reporte.insertarFinal("Tipo: " + tipo);
+        reporte.insertarFinal("Total frecuencia: " + total);
+        reporte.insertarFinal("Tripletes:");
+        for (int j = 0; j < tablaDatos.length; j++) {
+            NodoHash nodo = tablaDatos[j];
+            while (nodo != null) {
+                String triplete = nodo.getCadena();
+                if (mapeador.obtenerAminoacido(triplete).equals(aminoacido)) {
+                    reporte.insertarFinal("   " + triplete + " - " + nodo.getFrecuencia() + " ocurrencias");
+                }
+                nodo = nodo.getpNext();
+            }
+        }
+                 reporte.insertarFinal("\n");
+
+    }
+    return reporte;
+}
+
     
 
     /**
@@ -165,8 +248,7 @@ public class MapeadorAminoacidos {
      * @param cadena la cadena que se va a evaluar
      * @return el tipo que se encontro.
      */
-    public String obtenerTipo(String cadena){
-        String amino = obtenerAminoacido(cadena);
+    public String obtenerTipo(String amino){
         String[] noPolares = {"Fenilalanina", "Leucina", "Isoleucina", "Metionina", "Valina", "Prolina", "Triptófano", "Alanina", "Glicina"};
         String[] polares = {"Serina", "Treonina", "Cisteína", "Tirosina", "Asparagina", "Glutamina"};
         String[] cargaPositiva = {"Lisina", "Arginina", "Histidina"};

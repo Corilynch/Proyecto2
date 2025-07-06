@@ -220,10 +220,10 @@ public class Hash {
         return Tabla;
     }
 
-    /**
-     * Establece la tabla 
-     * @param tabla que se va a establecer 
-     */
+/**
+ * Establece la tabla 
+ * @param Tabla la tabla que se establecio 
+ */
     public void setTabla(NodoHash[] Tabla) {
         this.Tabla = Tabla;
     }
@@ -256,7 +256,7 @@ public class Hash {
 
     /**
      * Establece el total de colisiones
-     * @param listaColisiones el número de colisiones
+     * @param totalColisiones el número nuevo de colisiones
      */
     public void setTotalColisiones(int totalColisiones) {
         this.totalColisiones = totalColisiones;

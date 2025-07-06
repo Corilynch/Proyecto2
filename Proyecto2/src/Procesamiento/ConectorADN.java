@@ -6,101 +6,83 @@ package Procesamiento;
 
 import Estructuras.Hash;
 import Estructuras.ArbolBinario;
-import Estructuras.ListaPatrones;
 import Estructuras.NodoHash;
-import java.util.List;
 
 
+/**
+ * Facilita la interacción entre las estructuras de datos y el procesamiento.
+ */
 public class ConectorADN {
     private Hash tablaHash;
     private ArbolBinario arbolFrecuencias;
-    private ListaPatrones listaPatrones;
-    
+
+    /**
+     * Constructor que inicializa las estructuras vacías.
+     */
     public ConectorADN() {
         this.tablaHash = new Hash();
         this.arbolFrecuencias = new ArbolBinario();
-        this.listaPatrones = new ListaPatrones();
     }
-    
+
     /**
-     * Procesa una secuencia de ADN y carga todas las estructuras
+     * Procesa una secuencia de ADN y carga todas las estructuras.
      * @param secuenciaADN Cadena de ADN a procesar
      */
     public void procesarADN(String secuenciaADN) {
-        // Limpiar estructuras previas
         tablaHash = new Hash();
         arbolFrecuencias = new ArbolBinario();
-        listaPatrones = new ListaPatrones();
         
-        // Procesar la secuencia en tripletes
         for (int i = 0; i <= secuenciaADN.length() - 3; i++) {
             String triplete = secuenciaADN.substring(i, i + 3);
-            if (triplete.matches("[ATCG]+")) {
-                tablaHash.Guardar(triplete, i);
+            if (esTripleteValido(triplete)) {
+                tablaHash.guardar(triplete, i);
             }
         }
         
-        // Cargar el árbol binario y la lista de patrones
-        cargarEstructurasAuxiliares();
+        cargarArbol();
     }
-    
+
     /**
-     * Carga el árbol binario y la lista de patrones desde la tabla hash
+     * Valida que un triplete contenga solo caracteres válidos.
+     * @param triplete Cadena a validar
+     * @return true si es válido
      */
-    private void cargarEstructurasAuxiliares() {
-        for (NodoHash nodo : tablaHash.getTabla()) {
-            NodoHash current = nodo;
+    private boolean esTripleteValido(String triplete) {
+        for (int i = 0; i < triplete.length(); i++) {
+            char c = triplete.charAt(i);
+            if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Carga todos los nodos de la tabla hash en el árbol binario.
+     */
+    private void cargarArbol() {
+        for (int i = 0; i < tablaHash.getTabla().length; i++) {
+            NodoHash current = tablaHash.getTabla()[i];
             while (current != null) {
                 arbolFrecuencias.insertarPorFrecuencia(current);
                 current = current.getpNext();
             }
         }
-        listaPatrones.cargarDesdeHash(tablaHash);
     }
-    
-    // Métodos de acceso a las estructuras
-    public Hash getTablaHash() { return tablaHash; }
-    public ArbolBinario getArbolFrecuencias() { return arbolFrecuencias; }
-    public ListaPatrones getListaPatrones() { return listaPatrones; }
-    
+
     /**
-     * Busca un patrón específico con complejidad O(1) promedio
+     * @return Tabla hash con los tripletes
+     */
+    public Hash getTablaHash() {
+        return tablaHash;
+    }
+
+    /**
+     * Busca un triplete en la tabla hash.
      * @param triplete Patrón a buscar
-     * @return NodoHash con la información o null si no existe
+     * @return Nodo con la información o null si no existe
      */
     public NodoHash buscarPatron(String triplete) {
-        return tablaHash.Buscar(triplete);
-    }
-    
-    /**
-     * Obtiene el patrón más frecuente con complejidad O(log n)
-     * @return NodoHash del patrón más frecuente
-     */
-    public NodoHash obtenerPatronMasFrecuente() {
-        return arbolFrecuencias.Mayor(null).getNodo();
-    }
-    
-    /**
-     * Obtiene el patrón menos frecuente con complejidad O(log n)
-     * @return NodoHash del patrón menos frecuente
-     */
-    public NodoHash obtenerPatronMenosFrecuente() {
-        return arbolFrecuencias.Menor(null).getNodo();
-    }
-    
-    /**
-     * Obtiene todos los patrones ordenados por frecuencia
-     * @return Lista de nodos hash ordenados por frecuencia descendente
-     */
-    public List<NodoHash> obtenerPatronesOrdenados() {
-        return listaPatrones.getPatrones();
-    }
-    
-    /**
-     * Genera reporte de colisiones
-     * @return Lista de strings con el reporte
-     */
-    public List<String> generarReporteColisiones() {
-        return tablaHash.getReporteColisiones();
+        return tablaHash.buscar(triplete);
     }
 }

@@ -9,16 +9,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
+ * Función que muestra una ventana con el menu de opciones
  * @author alexandraloynaz
  */
 public class Ventana3 extends javax.swing.JFrame {
     
      private Hash hashTable;   
-    /**
-     * Creates new form Ventana3
-     */
-        
+/**
+ * Constructor.
+ * @param hashTable la hashTable que ya fue comprobada y descargada
+ */
     public Ventana3(Hash hashTable) {
         
         initComponents();

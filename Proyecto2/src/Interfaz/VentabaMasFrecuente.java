@@ -9,14 +9,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
+ * Función que muestra una ventana con la cadena mas frecuente
  * @author alexandraloynaz
  */
 public class VentabaMasFrecuente extends javax.swing.JFrame {
     private Hash hashTable;
-    /**
-     * Creates new form VentabaMasFrecuente
-     */
+  /**
+   * Constructor
+   * @param hashTable el HashTable que fue previamente cargado
+   */
     public VentabaMasFrecuente(Hash hashTable) {
        initComponents();
         setSize(600,630);

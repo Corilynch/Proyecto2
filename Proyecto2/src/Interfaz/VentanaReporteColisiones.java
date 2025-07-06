@@ -9,15 +9,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
+ * Ventana que muestra el reporte de colisiones
  * @author alexandraloynaz
  */
 public class VentanaReporteColisiones extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaReporteColisiones
-     */
     private Hash hashTable;
+    /**
+     * Constructor
+     * @param hashTable hashtable que ya fue comprobada.
+     */
     public VentanaReporteColisiones(Hash hashTable) {
        initComponents();
         setSize(600,630);

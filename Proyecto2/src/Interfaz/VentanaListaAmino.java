@@ -5,7 +5,7 @@
 package Interfaz;
 
 import Estructuras.Hash;
-import Procesamiento.ListaAminoacidos;
+
 import Procesamiento.ListaSimpleReportes;
 import Procesamiento.MapeadorAminoacidos;
 import Procesamiento.NodoReportes;
@@ -13,14 +13,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
+ * Función que muestra un reporte de los aminoácidos
  * @author alexandraloynaz
  */
 public class VentanaListaAmino extends javax.swing.JFrame {
     private Hash hashTable;
-    /**
-     * Creates new form VentanaListaAmino
-     */
+/**
+ * Constructor
+ * @param hashTable La hashTable que ya fue comprabada
+ */
     public VentanaListaAmino(Hash hashTable) {
        initComponents();
         setSize(600,630);

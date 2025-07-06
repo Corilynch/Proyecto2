@@ -8,14 +8,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
+ *Función que muestra los patrones
  * @author alexandraloynaz
  */
 public class VentanaVPatrones extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaVPatrones
-     */
+/**
+ * Ventana que muestra todos los patrones
+ * @param patrones la cadena de string que se mostrarán
+ */
     public VentanaVPatrones(String patrones) {
         initComponents();
         setSize(600,630);

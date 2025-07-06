@@ -10,14 +10,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
+ * Ventana que muestra el aminoácido menos frecuente
  * @author alexandraloynaz
  */
 public class VentanaMenosFrecuente extends javax.swing.JFrame {
     private Hash hashTable;
-    /**
-     * Creates new form VentanaMenosFrecuente
-     */
+/**
+ * Constructor
+ * @param hashTable la hashtable que ya fue compradado 
+ */
     public VentanaMenosFrecuente(Hash hashTable) {
         initComponents();
         setSize(600,630);

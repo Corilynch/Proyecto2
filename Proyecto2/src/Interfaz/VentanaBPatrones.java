@@ -10,14 +10,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
+ * Ventana que muestra el buscador de patrones 
  * @author alexandraloynaz
  */
 public class VentanaBPatrones extends javax.swing.JFrame {
     private Hash hashTable;
-    /**
-     * Creates new form VentanaBPatrones
-     */
+/**
+ * Constructor.
+ * @param hashTable La hashtable que ya fue comprobado.
+ */
     public VentanaBPatrones(Hash hashTable) {
         initComponents();
         setSize(600,630);

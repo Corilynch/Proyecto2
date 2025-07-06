@@ -9,13 +9,13 @@ import javax.swing.JLabel;
 
 
 /**
- *
+ *Función que muestra la ventana de bienvenida 
  * @author alexandraloynaz
  */
 public class Ventana1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Ventana1
+     * Comienza la ventana.
      */
     public Ventana1() {
         

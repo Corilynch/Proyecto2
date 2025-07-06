@@ -4,181 +4,103 @@
  */
 package Estructuras;
 
-import static java.lang.Math.abs;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
- * Implementación de una tabla hash que maneja colisiones mediante encadenamiento.
- * Incluye funcionalidad para registrar y reportar colisiones.
- * 
- * @author corinalynch
- * @version 1.0
+ * Implementación de tabla hash con manejo de colisiones por encadenamiento.
+ * Almacena tripletes de ADN y sus posiciones en la secuencia.
  */
 public class Hash {
-  
     private NodoHash[] Tabla;
     private int size;
     private int totalColisiones;
-    private Map<Integer, List<String>> registroColisiones;
-    private List<String> listaColisiones;
-    
+
     /**
-     * Constructor que inicializa una tabla hash con tamaño por defecto (10).
+     * Constructor que inicializa la tabla con tamaño por defecto (10).
      */
     public Hash() {
         this.size = 10;
         this.Tabla = new NodoHash[size];
         this.totalColisiones = 0;
-        this.registroColisiones = new HashMap<>();
-        this.listaColisiones = new ArrayList<>();
-    }
-    
- /**
-     * @return La tabla hash completa para iteración
-     */
-    public NodoHash[] getTabla() {
-        return this.Tabla;
-    }
-    
-    /**
-     * @return Tamaño de la tabla hash
-     */
-    public int getSize() {
-        return this.size;
     }
 
     /**
-     * Almacena un triplete en la tabla hash.
-     * @param triplete Cadena a almacenar
-     * @param posicion Posición asociada al triplete
+     * Almacena un triplete y su posición en la tabla hash.
+     * @param triplete Cadena de 3 caracteres (A, T, C, G)
+     * @param posicion Índice en la secuencia de ADN
      */
     public void Guardar(String triplete, int posicion) {
         int clave = Hasheo(triplete);
-        if(this.Tabla[clave]==null){
+        if(this.Tabla[clave] == null) {
             NodoHash nodo = new NodoHash(triplete, posicion);
             this.Tabla[clave] = nodo;
-        } else{
+        } else {
             if(!this.Tabla[clave].getCadena().equals(triplete)) {
-                registrarColision(clave, this.Tabla[clave].getCadena(), triplete);
+                totalColisiones++;
             }
             GuardarHit(triplete, posicion, clave);
         }
     }
-    
+
     /**
-     * Maneja la inserción cuando ocurre una colisión (método auxiliar).
-     * @param triplete Cadena a almacenar
-     * @param posicion Posición asociada
-     * @param clave Índice hash calculado
+     * Maneja la inserción cuando ocurre una colisión.
+     * @param triplete Cadena a insertar
+     * @param posicion Índice en la secuencia
+     * @param clave Índice calculado en la tabla
      */
     private void GuardarHit(String triplete, int posicion, int clave) {
         NodoHash current = this.Tabla[clave];
         NodoHash aux;
         do {
-            if(current.getCadena().equals(triplete)){
+            if(current.getCadena().equals(triplete)) {
                 current.Repetido(posicion);
                 return;
             }
             aux = current;
             current = current.getpNext();
-        } while (current!=null);
+        } while (current != null);
         aux.setpNext(new NodoHash(triplete, posicion));
     }
-    
+
     /**
      * Busca un triplete en la tabla hash.
      * @param triplete Cadena a buscar
-     * @return NodoHash que contiene el triplete, o null si no se encuentra
+     * @return NodoHash con la información o null si no existe
      */
     public NodoHash Buscar(String triplete) {
         int clave = Hasheo(triplete);
         NodoHash nodo = this.Tabla[clave];
-        while(nodo!=null){
-            if(triplete.equals(nodo.getCadena())){
+        while(nodo != null) {
+            if(triplete.equals(nodo.getCadena())) {
                 return nodo;
             }
             nodo = nodo.getpNext();
         }
         return nodo;
     }
-    
+
     /**
-     * Calcula el valor hash para un triplete.
-     * @param triplete Cadena a hashear
+     * Función hash personalizada para tripletes de ADN.
+     * @param triplete Cadena de 3 caracteres
      * @return Índice en la tabla hash
      */
     private int Hasheo(String triplete) {
-        int valor = abs(triplete.hashCode());
-        return valor % size;
-    }
-    
-    /**
-     * Registra internamente una colisión detectada.
-     * @param indice Índice donde ocurrió la colisión
-     * @param existente Valor previamente almacenado
-     * @param nuevo Valor que causó la colisión
-     */
-    private void registrarColision(int indice, String existente, String nuevo) {
-        totalColisiones++;
-        
-        String colision = String.format("Colisión en índice %d: '%s' con '%s'", 
-                                      indice, existente, nuevo);
-        listaColisiones.add(colision);
-        
-        if (!registroColisiones.containsKey(indice)) {
-            registroColisiones.put(indice, new ArrayList<>());
+        int valor = 0;
+        for(int i = 0; i < triplete.length(); i++) {
+            valor = 31 * valor + triplete.charAt(i);
         }
-        registroColisiones.get(indice).add(existente + " <> " + nuevo);
+        return Math.abs(valor) % size;
     }
-    
+
     /**
-     * Genera un reporte detallado de todas las colisiones registradas.
-     * @return Lista formateada con el reporte de colisiones
-     */
-    public List<String> getReporteColisiones() {
-        List<String> reporte = new ArrayList<>();
-        
-        reporte.add("=== REPORTE DE COLISIONES ===");
-        reporte.add("Total de colisiones: " + totalColisiones);
-        reporte.add("");
-        
-        if (totalColisiones > 0) {
-            reporte.add("Detalle por índices:");
-            for (Map.Entry<Integer, List<String>> entry : registroColisiones.entrySet()) {
-                reporte.add("Índice " + entry.getKey() + ":");
-                for (String colision : entry.getValue()) {
-                    reporte.add("  • " + colision);
-                }
-            }
-            
-            reporte.add("");
-            reporte.add("Listado cronológico:");
-            for (String colision : listaColisiones) {
-                reporte.add(colision);
-            }
-        } else {
-            reporte.add("No se registraron colisiones en la tabla hash.");
-        }
-        
-        return reporte;
-    }
-    
-    /**
-     * Obtiene el número total de colisiones registradas.
-     * @return Contador total de colisiones
+     * @return Número total de colisiones registradas
      */
     public int getTotalColisiones() {
         return totalColisiones;
     }
-    
+
     /**
-     * Obtiene el mapa detallado de colisiones organizado por índices.
-     * @return Mapa donde la clave es el índice y el valor es la lista de colisiones
+     * @return Arreglo principal de la tabla hash
      */
-    public Map<Integer, List<String>> getMapaColisiones() {
-        return registroColisiones;
+    public NodoHash[] getTabla() {
+        return Tabla;
     }
 }

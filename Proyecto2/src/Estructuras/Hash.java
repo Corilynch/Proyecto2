@@ -137,7 +137,8 @@ public class Hash {
             for (int i = 0; i < Tabla.length; i++) {
             NodoHash actual = Tabla[i];
             while (actual != null) {
-                resultado += actual.getCadena() + " -> Frecuencia: " + actual.getFrecuencia() + " | Posiciones: " + actual.Getposicion()+ "\n"; 
+                resultado += actual.getCadena()+":" + "  Frecuencia: " + actual.getFrecuencia() + "  Posiciones: " + actual.Getposicion()+ "\n"; 
+//                resultado += "\n";
             actual = actual.getpNext();
         }
     }

@@ -20,14 +20,14 @@ public class Ventana1 extends javax.swing.JFrame {
     public Ventana1() {
         
         initComponents();
-        setSize(300,430);
+        setSize(600,630);
         setLocationRelativeTo(null);
 
         ImageIcon boton = new ImageIcon(getClass().getResource("/Imagenes/BotonComenzar.png"));
         BotonComenzar.setIcon(boton);
         ImageIcon imagenFondo= new ImageIcon(getClass().getResource("/Imagenes/FondoVentana1.png"));
         JLabel fondo = new JLabel(imagenFondo);
-        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 405));
+        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 605));
         
       
     }
@@ -52,7 +52,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 BotonComenzarActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonComenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 110, 40));
+        getContentPane().add(BotonComenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 210, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

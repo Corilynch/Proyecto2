@@ -96,7 +96,7 @@ public class VentanaBPatrones extends javax.swing.JFrame {
         return;
     }
       if(cadena.length()!= 3){
-        AreaRespuesta.setText("Ingrese una cadena Valida de solo 3 letras (Acuerdate que las letras de la cadena son A,T,G y C)");
+        AreaRespuesta.setText("Ingrese una cadena Valida de solo 3 letras \n(Acuerdate que las letras de la cadena son A,T,G y C)\n");
         return;
     }
      NodoHash resultado = hashTable.buscar(cadena); 

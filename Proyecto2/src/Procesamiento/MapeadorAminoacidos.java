@@ -142,24 +142,22 @@ public class MapeadorAminoacidos {
         return triplete.equals("TAA") || triplete.equals("TAG") || triplete.equals("TGA");
     }
     
-  /**
-   * Clase para generar un reporte de lo obtenido por el TXT
-   * @param tabla 
-   * @param lista 
-   */
-    public void generarReporte(Hash tabla, ListaSimpleReportes lista) {
+    public void generarListaAmino(Hash tabla, ListaAminoacidos lista){
+        lista.vaciar();
         NodoHash[] tablaDatos = tabla.getTabla();
-        String reporte = "===== REPORTE BÁSICO =====\nTriplete\tFrecuencia\tAminoácido\n";
-
-        for (NodoHash nodo : tablaDatos) {
-            while (nodo != null) {
-                String amino = obtenerAminoacido(nodo.getCadena());
-                reporte += nodo.getCadena() + "     " + nodo.getFrecuencia() + "    " + amino + "      ";
-                nodo = nodo.getpNext();
+        for (int i = 0; i < tablaDatos.length; i++) {
+            NodoHash nodo = tablaDatos[i];
+        while (nodo != null) {
+        String cadena = nodo.getCadena();
+        int frecuencia = nodo.getFrecuencia();
+        String tipo = obtenerTipo(cadena);
+        lista.insertarFinal(cadena, frecuencia, tipo);
+        nodo = nodo.getpNext();
             }
+            
         }
-        lista.insertarFinal(reporte);
     }
+  
     
 
     /**

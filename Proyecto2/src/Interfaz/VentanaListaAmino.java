@@ -5,6 +5,8 @@
 package Interfaz;
 
 import Estructuras.Hash;
+import Procesamiento.ListaAminoacidos;
+import Procesamiento.MapeadorAminoacidos;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -21,7 +23,12 @@ public class VentanaListaAmino extends javax.swing.JFrame {
        initComponents();
         setSize(600,630);
         this.hashTable = hashTable;
-      
+        MapeadorAminoacidos mapeador = new MapeadorAminoacidos();
+        ListaAminoacidos listaAmino = new ListaAminoacidos();
+
+        mapeador.generarListaAmino(hashTable, listaAmino);
+
+        AreaMostrar.setText(listaAmino.imprimir());
         ImageIcon BotonRegresar = new ImageIcon(getClass().getResource("/Imagenes/botonRegresar.png"));
         botonRegresar.setIcon(BotonRegresar);
        
@@ -30,6 +37,7 @@ public class VentanaListaAmino extends javax.swing.JFrame {
         JLabel fondo = new JLabel(imagenfondo);
         getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 605));
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,6 +49,8 @@ public class VentanaListaAmino extends javax.swing.JFrame {
     private void initComponents() {
 
         botonRegresar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AreaMostrar = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,6 +61,12 @@ public class VentanaListaAmino extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 130, 40));
+
+        AreaMostrar.setColumns(20);
+        AreaMostrar.setRows(5);
+        jScrollPane1.setViewportView(AreaMostrar);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, 230));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -97,6 +113,8 @@ public class VentanaListaAmino extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea AreaMostrar;
     private javax.swing.JButton botonRegresar;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -94,6 +94,7 @@ public class Ventana2 extends javax.swing.JFrame {
          if(continuar){
             Ventana3 v3= new Ventana3(tableHash); 
             v3.setVisible(true);
+            this.dispose();
         }
         else{
             JOptionPane.showMessageDialog(null, "Primero debe cargar un archivo TXT y se debe validar que cumpla con la estructura", "Error", JOptionPane.ERROR_MESSAGE);

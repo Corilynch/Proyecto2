@@ -116,6 +116,11 @@ public class Ventana3 extends javax.swing.JFrame {
         getContentPane().add(botonMaFrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 150, 80));
 
         botonReportC.setBackground(new java.awt.Color(89, 193, 201));
+        botonReportC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReportCActionPerformed(evt);
+            }
+        });
         getContentPane().add(botonReportC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 160, 90));
 
         botonLisAmino.setBackground(new java.awt.Color(89, 193, 201));
@@ -130,7 +135,8 @@ public class Ventana3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLisAminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLisAminoActionPerformed
-        // TODO add your handling code here:
+        VentanaListaAmino ver = new VentanaListaAmino (hashTable); 
+        ver.setVisible(true);
     }//GEN-LAST:event_botonLisAminoActionPerformed
 
     private void botonVPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVPatronesActionPerformed
@@ -154,6 +160,11 @@ public class Ventana3 extends javax.swing.JFrame {
        VentabaMasFrecuente ver = new VentabaMasFrecuente (hashTable); 
         ver.setVisible(true);
     }//GEN-LAST:event_botonMaFrecActionPerformed
+
+    private void botonReportCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReportCActionPerformed
+        VentanaReporteColisiones ver = new VentanaReporteColisiones (hashTable); 
+        ver.setVisible(true);
+    }//GEN-LAST:event_botonReportCActionPerformed
 
     /**
      * @param args the command line arguments

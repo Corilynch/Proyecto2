@@ -4,32 +4,31 @@
  */
 package Interfaz;
 
+import Estructuras.Hash;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
 
 /**
  *
  * @author alexandraloynaz
  */
-public class Ventana1 extends javax.swing.JFrame {
-
+public class VentanaListaAmino extends javax.swing.JFrame {
+    private Hash hashTable;
     /**
-     * Creates new form Ventana1
+     * Creates new form VentanaListaAmino
      */
-    public Ventana1() {
-        
-        initComponents();
-        setSize(300,430);
-        setLocationRelativeTo(null);
-
-        ImageIcon boton = new ImageIcon(getClass().getResource("/Imagenes/BotonComenzar.png"));
-        BotonComenzar.setIcon(boton);
-        ImageIcon imagenFondo= new ImageIcon(getClass().getResource("/Imagenes/FondoVentana1.png"));
-        JLabel fondo = new JLabel(imagenFondo);
-        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 405));
-        
+    public VentanaListaAmino(Hash hashTable) {
+       initComponents();
+        setSize(600,630);
+        this.hashTable = hashTable;
       
+        ImageIcon BotonRegresar = new ImageIcon(getClass().getResource("/Imagenes/botonRegresar.png"));
+        botonRegresar.setIcon(BotonRegresar);
+       
+        setLocationRelativeTo(null);
+        ImageIcon imagenfondo = new ImageIcon(getClass().getResource("/Imagenes/FondoListaAminoacidos.png"));
+        JLabel fondo = new JLabel(imagenfondo);
+        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 605));
     }
 
     /**
@@ -41,29 +40,25 @@ public class Ventana1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BotonComenzar = new javax.swing.JButton();
+        botonRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        BotonComenzar.setBackground(new java.awt.Color(89, 193, 201));
-        BotonComenzar.addActionListener(new java.awt.event.ActionListener() {
+        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonComenzarActionPerformed(evt);
+                botonRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonComenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 110, 40));
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 130, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BotonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonComenzarActionPerformed
-        Ventana2 v2 = new Ventana2(); 
-        v2.setVisible(true);
+    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
         this.dispose();
-       
         
-    }//GEN-LAST:event_BotonComenzarActionPerformed
+    }//GEN-LAST:event_botonRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,25 +77,26 @@ public class Ventana1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventana1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListaAmino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventana1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListaAmino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventana1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListaAmino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventana1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListaAmino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana1().setVisible(true);
+                Hash nulo = new Hash();
+                new VentanaListaAmino(nulo).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonComenzar;
+    private javax.swing.JButton botonRegresar;
     // End of variables declaration//GEN-END:variables
 }

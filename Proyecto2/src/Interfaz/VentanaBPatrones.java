@@ -101,10 +101,10 @@ public class VentanaBPatrones extends javax.swing.JFrame {
     }
      NodoHash resultado = hashTable.buscar(cadena); 
      if (resultado != null) {
-        String info = "Cadena: " + resultado.getCadena() + "\nFrecuencia: " + resultado.getFrecuencia() + "\nPosiciones: " + resultado.Getposicion();
+        String info = "Cadena: " + resultado.getCadena() + "\nFrecuencia: " + resultado.getFrecuencia() + "\nPosiciones: " + resultado.Getposicion()+ "\n";
         AreaRespuesta.setText(info);
     } else {
-        AreaRespuesta.setText("🔍 No se encontró la tripleta: " + cadena);
+        AreaRespuesta.setText("No se encontró la cadena: " + cadena+"\n"+ "Acuerdate que las letras de la cadena son\n A,T,G y C \n");
     }
 
      

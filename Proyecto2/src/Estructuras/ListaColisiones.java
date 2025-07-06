@@ -37,10 +37,10 @@ public class ListaColisiones {
             setpFirst(nuevoNodo);
         } else {
             NodoColision aux = getpFirst();
-            while (aux.pNext != null) {
-                aux = aux.pNext;
+            while (aux.getpNext() != null) {
+                aux = aux.getpNext();
             }
-            aux.pNext = nuevoNodo;
+            aux.setpNext(nuevoNodo);
         }
         cont++;
     }
@@ -56,17 +56,27 @@ public class ListaColisiones {
     /**
      * Imprime todas las colisiones en la lista.
      */
-    public void imprimir() {
-        if (esVacio()) {
-            System.out.println("No se registraron colisiones.");
-            return;
-        }
-        NodoColision aux = getpFirst();
-        while (aux != null) {
-            System.out.printf("Colisión en índice %d: '%s' con '%s'%n", aux.indice, aux.existente, aux.nuevo);
-            aux = aux.pNext;
-        }
+    public String mostrar() {
+        String reporte = "";
+        NodoColision actual = pFirst; 
+    int contador = 1;
+    while (actual != null) {
+        reporte += "Colisión " + contador + "\n";
+        reporte += "Índice: " + actual.getIndice() + "\n";
+        reporte += "Existente: " + actual.getExistente()+ "\n";
+        reporte += "Nuevo: " + actual.getNuevo() + "\n";
+        reporte += "-----------------------------"; 
+        reporte += "\n";
+        actual = actual.getpNext(); 
+        contador++;
     }
+
+    if (reporte.equals("")) {
+        return "No hay colisiones registradas.";
+    }
+
+    return reporte;
+}
 
     /**
      * Devuelve la cantidad de colisiones registradas.

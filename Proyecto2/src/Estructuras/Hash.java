@@ -18,26 +18,31 @@ public class Hash {
     private int totalColisiones;
     private ListaColisiones listaColisiones;
     /**
-     * Constructor que inicializa una tabla hash con tamaño por defecto (10).
+     * Constructor que inicializa una tabla hash con tamaño por defecto (503), se eligió este número porque es un primo grande que va a evitar mejor las colisiones.
      * Inicializa los contadores y la lista de colisiones vacía.
      */
     public Hash() {
-        this.size = 10;
+        this.size = 503;
         this.Tabla = new NodoHash[size];
         this.totalColisiones = 0;
         this.listaColisiones = new ListaColisiones();
     }
 /**
- * Función que calcula un índice para una tripleta sumando el valor ASCII de cada caracter 
+ * Calcula el índice hash para una cadena de 3 utilizando un número primo 31.
+ * Este método multiplica el valor acumulado por 31 y suma el valor ASCII del carácter actual, asegurando que el resultado sea positivo para evitar índices negativos.
+ * 
  * @param tripleta cadena que se desea utilizar
  * @return  índice válido dentro del arreglo de la tabla hash
  */
     private int hasheo(String tripleta){
-        int suma = 0;
+        int hash = 0;
+        int primo = 31;
         for (int i = 0; i < tripleta.length(); i++) {
-            suma += tripleta.charAt(i);
+            hash = primo * hash + tripleta.charAt(i);
+            if(hash<0){
+                hash = -hash;}
         }
-        return suma% getSize();
+        return hash % getSize();
     }
     
     /**
@@ -191,14 +196,13 @@ public class Hash {
     /**
      * Devuelve un reporte de las colisiones ocurridas. 
      */
-    public void imprimirReporte(){
-        if(getTotalColisiones()==0){
-            System.out.println("No se registan colisiones");
-        }
-        else{
-            getListaColisiones().imprimir();}
-    
+    public String mostrarColisiones() {
+        if (getTotalColisiones() == 0) {
+            return "No se registran colisiones.";
+    } else {
+        return getListaColisiones().mostrar();
     }
+}
     /**
      * Devuelve la cantidad total de colisiones registradas
      * @return el numero total de colisiones

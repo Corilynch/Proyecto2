@@ -4,6 +4,10 @@
  */
 package Interfaz;
 
+import Estructuras.Hash;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 /**
  *
  * @author alexandraloynaz
@@ -13,8 +17,20 @@ public class VentanaReporteColisiones extends javax.swing.JFrame {
     /**
      * Creates new form VentanaReporteColisiones
      */
-    public VentanaReporteColisiones() {
-        initComponents();
+    private Hash hashTable;
+    public VentanaReporteColisiones(Hash hashTable) {
+       initComponents();
+        setSize(600,630);
+        this.hashTable = hashTable;
+        AreaColisiones.setText("");
+        AreaColisiones.setText(hashTable.mostrarColisiones());
+        ImageIcon BotonRegresar = new ImageIcon(getClass().getResource("/Imagenes/botonRegresar.png"));
+        botonRegresar.setIcon(BotonRegresar);
+       
+        setLocationRelativeTo(null);
+        ImageIcon imagenfondo = new ImageIcon(getClass().getResource("/Imagenes/FondoReporteColisiones.png"));
+        JLabel fondo = new JLabel(imagenfondo);
+        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 605));
     }
 
     /**
@@ -26,21 +42,32 @@ public class VentanaReporteColisiones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        botonRegresar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AreaColisiones = new javax.swing.JTextArea();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, 140, 50));
+
+        AreaColisiones.setColumns(20);
+        AreaColisiones.setRows(5);
+        jScrollPane1.setViewportView(AreaColisiones);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, 230));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -72,11 +99,15 @@ public class VentanaReporteColisiones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaReporteColisiones().setVisible(true);
+                Hash nulo = new Hash();
+                new VentanaReporteColisiones(nulo).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea AreaColisiones;
+    private javax.swing.JButton botonRegresar;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
